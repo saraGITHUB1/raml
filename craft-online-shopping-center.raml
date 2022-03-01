@@ -1,0 +1,79 @@
+#%RAML 1.0
+title: Craft online shopping center
+/product:
+  get:
+    headers:
+      Cookie: 
+        type: string
+        required: false
+      responses:
+      '200':
+          description: ok
+      '401':
+        description: Unauthorized
+      Connection-type: 
+        description: multiple connection is allowed
+        required: false
+    queryParameters:
+      name:
+        type: string
+        description: product name
+        required: false
+        example: Dell
+        maxLength: 10
+      productID:
+        type: integer
+        description: product ID
+        required: false
+        example: 555
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/products.raml
+             
+      404:
+        body:
+          application/json:
+            example:
+              {
+                "message": "resource not found"
+              }
+  /{productID}:
+    get:
+      responses:
+        200:
+           body:
+             application/json:
+              example: !include examples/product.raml
+                
+          
+    
+
+
+         
+/users:
+  post:
+    body:
+      application/json:
+        example: !include examples/user2.raml
+          
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              {
+                "uid": 2222
+              }
+        
+      
+      
+      
+
+    
+      
+      
+       
+          
+          
